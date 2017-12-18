@@ -1,0 +1,36 @@
+p{
+    text-align: center;
+    font-size: 35px;
+}
+table
+{
+    border-collapse: collapse;
+   	margin : 0 auto ;
+    color:black;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    text-align: center;
+    padding:4px;
+}
+
+ #formulaire {
+ background-color:#FAFAFA;
+ padding:10px;
+ border: 2px dotted #999;
+ border-radius: 0;
+ margin: auto;
+ width:300px;
+ padding-left:auto;
+ }
+.bas{
+  margin-bottom:10px;
+}
+
+body{
+  background-color: rgb(187 , 210 , 225	);
+  /*background-image: url("fond_tipe.jpg");
+  background-position: right top;
+  background-repeat: no-repeat;*/
+}

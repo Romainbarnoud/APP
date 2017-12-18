@@ -1,0 +1,23 @@
+.footer {
+  margin-top:10px;
+  left: 0;
+  height: 10%;
+  width: 100%;
+  overflow:hidden;
+  background-color: #fff;
+  border:1px solid black;
+}
+.footer ul {
+  margin-left: 20%;
+}
+.footer ul li{
+  display:inline-block;
+  margin-right:10px;
+}
+.footer ul li a:hover {
+  color: #dedede;
+}
+.footer a {
+  text-decoration: none;
+  color: #000;
+}

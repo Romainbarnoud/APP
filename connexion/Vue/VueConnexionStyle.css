@@ -1,0 +1,29 @@
+
+
+.FormulaireDeCo
+{
+	width: 20%;
+	margin: auto;
+	margin-top: 100px;
+	border: solid #1A8DD0;
+	text-align: center;
+	vertical-align : middle;
+	background-color: #D6E7F2;
+	font:bold 13px Arial;
+	color:#555;
+}
+
+.bouton
+{
+	padding:6px 0 6px 0;
+	font:bold 13px Arial;
+	background:#f5f5f5;
+	color:#555;
+	border-radius:2px;
+	border:1px solid #ccc;
+	box-shadow:1px 1px 3px #999;
+	width:110px;
+	cursor:pointer;
+	text-transform:capitalize;
+	border:none;
+}

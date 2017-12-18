@@ -1,0 +1,71 @@
+body {
+	background-color:rgb(187 , 210 , 225);
+}
+
+#profil_et_édition {
+	display: flex;
+	flex-direction: row;
+}
+
+#info_profil {
+	width: 400px;
+	background-color: grey;
+
+	border:1px solid black;
+
+
+	padding:10px;
+	margin-right:50px;
+	margin-left:200px;
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+#edition_profil {
+
+	width:500px;
+	background-color: grey;
+
+	border:1px solid black;
+
+	padding:10px;
+	margin-right:40px;
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+
+#gestion_utilisateurs_secondaires {
+	display: flex;
+	flex-direction: row;
+	margin-left:160px;
+
+}
+#utilisateurs_secondaires {
+	width: 420px;
+	background-color: grey;
+
+	border:1px solid black;
+
+	/*padding:10px;*/
+	margin-right:50px;
+	margin-left:40px;
+
+}
+
+
+#droits_utilisateurs {
+	width:500px;
+	background-color: grey;
+
+	border:1px solid black;
+
+	padding:10px;
+	margin-right:40px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+
+}
+

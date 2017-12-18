@@ -1,0 +1,168 @@
+/*OBJETS PRINCIPAUX Piece*/
+body{
+	background-color: rgb(187 , 210 , 225);
+}
+.cadre{
+	margin-left: 200px ;
+	width: 740px ;
+	border: 4px solid grey ;
+	margin-top: 5px ;
+	height: 200px ;
+}
+.bouton{
+	/*Carrés*/
+	border-top : 2px solid grey ;
+	border-left : 2px solid grey ;
+	border-right : 2px solid black ;
+	border-bottom : 2px solid black ;
+	background-image: radial-gradient(circle at center, #99BDC9 , #4182BA) ;
+	width: 120px ;
+	height: 120px ;
+	border-radius: 5px ;
+	/*Texte*/
+	text-decoration : none ;
+	color: black ;
+	font-weight: bold ;
+	text-align: center ;
+	display: flex ;
+	flex-direction: column ;
+	justify-content: center ;
+}
+/*Annimations*/
+.bouton:hover{
+	background-image: radial-gradient(circle at center, #99BDC9 60%, #4182BA) ;	
+}
+.bouton:active{
+	border-top : 2px solid black ;
+	border-left : 2px solid black ;
+	border-right : 2px solid grey ;
+	border-bottom : 2px solid grey ;
+}
+.bouton_allume{
+	/*Carrés*/
+	border-top : 2px solid grey ;
+	border-left : 2px solid grey ;
+	border-right : 2px solid black ;
+	border-bottom : 2px solid black ;
+	background-image: radial-gradient(circle at center, #7EED7E , #29CC29) ;
+	width: 120px ;
+	height: 120px ;
+	border-radius: 5px ;
+	/*Texte*/
+	text-decoration : none ;
+	color: black ;
+	font-weight: bold ;
+	text-align: center ;
+	display: flex ;
+	flex-direction: column ;
+	justify-content: center ;
+}
+/*Annimations*/
+.bouton_allume:hover{
+	background-image: radial-gradient(circle at center, #7EED7E 60%, #29CC29) ;	
+}
+.bouton_allume:active{
+	border-top : 2px solid black ;
+	border-left : 2px solid black ;
+	border-right : 2px solid grey ;
+	border-bottom : 2px solid grey ;
+}
+
+h1{
+	font-size: 25px ;
+	font-weight: bold ;
+	text-align: center ;
+	display: flex ;
+	flex-direction: column ;
+	justify-content: center ;
+}	
+
+/*PERSONNALISATION DE CHAQUE OBJET*/
+
+/*Affichage du menu*/
+#acces_rapide{
+	text-decoration : none ;
+}
+#cadre_menu{
+	border-width: 2px ;
+	width: 744px ;
+	height: auto ;
+}
+/*Affichage des pièces*/
+#titre_piece{
+	height: 60px ;
+	margin-bottom: 0px ;
+}
+#bouton_piece{
+	font-size: 25px ;
+	float: left ;
+	margin-left: 20px ;
+	margin-top: 20px ;
+}
+/*Affichage des fonctions*/
+
+#cadre_infos{	
+	width: 460px ;
+}
+#titre_infos{
+	float: left ;
+	height: 60px ;
+	width: 460px ;
+}
+
+/*Affichage des pannes*/
+#titre_pannes{
+	width: 265px ;
+	margin-left: 675px ;
+	height: 60px ;
+	float: left ;
+}
+#cadre_pannes{
+	width: 265px ;
+	margin-left: 675px ;
+	height: 60px ;
+}
+.equipement_panne{
+	font-size: 15px ;
+	font-weight: bold ;
+	margin-left: 5px ;
+	border: 2px solid black ;
+	width: 240px ;
+	height: 20px ;
+	background-image: radial-gradient(circle at center, #D61500 50%, #F25618) ;
+	margin-bottom: 5px ;
+	padding: 5px ;
+	text-align: center ;
+}
+.infos{
+	font-size: 15px ;
+	font-weight: bold ;
+	margin-left: 5px ;
+	margin-top: 5px ;
+	border: 2px solid black ;
+	width: 435px ;
+	height: 20px ;
+	background-image: radial-gradient(circle at center, #99BDC9 , #4182BA) ;
+	margin-bottom: 5px ;
+	padding: 5px ;
+	text-align: center ;
+}
+#premiere_info{
+	margin-top: 75px ;
+}
+#bouton_panne{
+	font-size: 15px ;
+	margin-top: 70px ;
+	margin-bottom: 10px ;
+	margin-left: 5px ;
+	width: 120px ;
+	height: 60px ;	
+}
+#bouton_formulaire{
+	font-size: 15px ;
+	margin-left: 135px ;
+	margin-top: -74px ;
+	margin-bottom: 10px ;
+	width: 120px ;
+	height: 60px ;
+}

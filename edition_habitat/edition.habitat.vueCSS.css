@@ -1,0 +1,115 @@
+body
+{
+	background-color: rgb(187 , 210 , 225);
+	margin: 0px;
+}
+
+h1
+{
+	font-size: 30px;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+#sectionPieces
+{
+	width: 50%;
+	background-color: white;
+	border-radius: 15px;
+	padding-right: 20px;
+	padding-left: 40px;
+	padding-bottom: 40px;
+	padding-top: 5px;
+	margin: auto;
+	margin-top: 50px;
+	
+}
+
+#cadreIconePiece
+{
+	width: 95%;
+	min-height: 150px;
+	border: 1px solid gray;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-around;
+}
+
+.lienEdition
+{
+	display: block;
+	width: 100px;
+	height: 120px;
+	border: solid gray 3px;
+	border-radius: 5px;
+	background-color: #3F819A;
+	margin-right: 20px;
+	margin-left: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+	display: flex;
+	flex-direction: column ;
+	justify-content: center ;
+	flex-wrap: wrap;
+	padding-right: 20px;
+	padding-left: 20px;
+	
+	color: black;
+	font-size: 25px;
+	font-weight:bold;
+	text-decoration: none;
+	text-align: center;
+	
+	
+}
+
+#sectionEdition
+{
+	width: 50%;
+	background-color: white;
+	border-radius: 15px;
+	margin: auto;
+	padding-right: 20px;
+	padding-left: 40px;
+	padding-bottom: 40px;
+	padding-top: 5px;
+	margin-top: 50px;
+}
+
+#formulaire
+{
+	margin-bottom: 10px;
+}
+table
+{
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin: auto;
+	margin-top: 20px;
+}
+
+th
+{
+	border: 1px solid black;
+	width: 100px;
+}
+
+td
+{
+	border: 1px solid black;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+

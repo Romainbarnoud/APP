@@ -1,0 +1,79 @@
+html {
+  position: relative;
+  min-height: 100%;
+  font-family: Arial;
+}
+body{
+	background-color: rgb(187 , 210 , 225);
+}
+.ariane {
+  text-align: center;
+  margin-top:10px;
+  width:100%;
+  height:50px;
+  border: 1px solid black;
+}
+
+.ariane button {
+  margin-top:1%;
+}
+
+.liste_pannes {
+  margin: 0 auto;
+  margin-top:1%;
+  width:100%;
+  height:500px;
+  border: 1px solid black;
+}
+
+#details_panne {
+  margin: 0 auto;
+  margin-top: 1%;
+  width: 80%;
+  height:300px;
+  border: 1px solid black;
+}
+footer {
+margin: 0 auto;
+  left: 0;
+  bottom: 0;
+  height: 10%;
+  width: 100%;
+  overflow:hidden;
+  border: 1px solid black;
+}
+
+#navlist {
+	text-align:center;
+}
+
+#navlist li {
+  margin: 0 auto;
+	width: 150px;
+  display: inline-block;
+	list-style-type: none;
+}
+#navlist1 {
+  text-align: center;
+}
+#navlist1 li {
+	margin: 0 auto;
+	width: 250px;
+  display: inline-block;
+	list-style-type: none;
+}
+
+#navlist:hover{
+  color: lightgrey;
+}
+#navlist strong {
+  color: #000;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+.submit {
+  text-align: center;
+  margin-left: 50%;
+}

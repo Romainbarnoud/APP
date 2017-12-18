@@ -1,0 +1,80 @@
+#entete
+{
+	display: flex;
+	justify-content: space-between;
+	margin: 0px;
+	padding: 0px;
+	font-family: Verdana, Arial;
+	font-size: 15px;
+	background: #EFEFEF;
+	background-color: #A5A5A5;
+	height: 130px;
+}
+
+.nom
+{
+	width: 450px;
+
+}
+
+
+.nom a
+{
+	font-size: 100px;
+	text-align: center;
+	white-space: pre;
+	text-decoration: none;
+	color: #39758C;
+
+}
+
+
+.logo
+{
+	margin: 10px 0 0 20px;
+
+}
+
+
+.BoutonDeconnexion
+{
+	width:120px;
+	height: 20px;
+	padding:6px 0 6px 0;
+	margin: 7px 10px 0 0;
+	background:#f5f5f5;
+	border-radius:2px;
+	border:1px solid #ccc;
+	box-shadow:1px 1px 3px #999;
+	cursor:pointer;
+	text-align: center;
+}
+
+
+
+
+.TextDeconnexion
+{	
+	font:bold 13px Arial;
+	color:#555;
+	text-transform:capitalize;
+	text-decoration : none;
+}
+
+nav
+{
+	
+	display: flex;
+	width: 195px;
+	height: 160px;
+	background:#A5A5A5;
+	position: fixed;
+
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+li:hover{
+	font-weight:bold;
+}

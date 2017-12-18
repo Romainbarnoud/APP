@@ -1,0 +1,128 @@
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: rgb(187 , 210 , 225	);
+}
+
+header {
+  height: 100px;
+  width:100%;
+  top: 0;
+  left:0;
+}
+
+.ariane {
+  margin-left: 200px;
+  width:auto;
+  text-align: center;
+  margin-top:8%;
+  height:50px;
+}
+.ariane button {
+  background-color: transparent;
+  border:2px solid black;
+  font-family: Roboto;
+  font-weight: bold;
+  margin-top:1%;
+  margin-left:1%;
+  font-size: 15px;
+  cursor:pointer;
+}
+.ariane button:hover {
+  color: #484848;
+  border-color: #484848;
+}
+.liste_pannes {
+  margin: 0 auto;
+  margin-left: 200px;
+  margin-top:1%;
+  width:80%;
+  height:500px;
+  background-color: #fff;
+  border: 2px solid black;
+}
+
+#details_panne {
+  margin-left: 200px;
+  margin-top: 1%;
+  width: 80%;
+  height:300px;
+  background-color: #fff;
+  border: 2px solid black;
+}
+footer {
+  margin: 0 auto;
+  left: 0;
+  bottom: 0;
+  height: 10%;
+  width: 100%;
+  overflow:hidden;
+  border: 1px solid black;
+}
+
+#navlist {
+  text-align:center;
+}
+
+#navlist li {
+  margin: 0 auto;
+  width: 150px;
+  display: inline-block;
+  list-style-type: none;
+}
+#navlist1 {
+  text-align: center;
+}
+#navlist1 li {
+	margin: 0 auto;
+	width: 250px;
+  	display: inline-block;
+	list-style-type: none;
+}
+
+#navlist:hover{
+  color: lightgrey;
+}
+#navlist strong {
+  color: #000;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+#chatTab {
+    z-index:1000;
+    position:fixed;
+    bottom:0;
+    background-color:skyblue;
+    color:white;
+    width:20%;
+    margin:0;
+    padding:0;
+    text-align:center;
+    font-size:1.5em;
+}
+#chatTab:hover {
+    cursor:pointer;
+}
+#chat {
+    z-index:1001;
+    position:fixed;
+    padding:0;
+    margin:0;
+    bottom:-325px;
+    height:300px;
+		background-color: #ffffff;
+		overflow:scroll;
+		overflow-x: hidden;
+		width:20%;
+}
+#chat_form {
+position:fixed;
+bottom:0;
+display:none;
+margin : 0 auto;
+background-color: #fff;
+width:20%;
+}

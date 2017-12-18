@@ -1,0 +1,6 @@
+body {
+	max-height: 500px;
+	max-width:500px;
+	border:1px solid black;
+	background-color: grey;
+}
