@@ -44,13 +44,13 @@ $Etat = $RechercheEtat['Etat_connexion'];
 	{
 		if ($MDPuti == null) // On test si l'adresse mail existe bien dans la bdd.
 		{
-		echo "Votre adresse email est erronée. Redirection dans 3 secondes...";
-		header('Refresh: 3; ../../connexionVue/VueConnexion.php');
+		echo "Une des deux informations est eronnee. Redirection dans 3 secondes...";
+		header('Refresh: 3; ../../connexion/Vue/VueConnexion.php');
 		}
 
 		else if ($mdpF == $MDPuti) //On compare le mdp dans la bdd et le mdp rentré.
 		{
-			
+
 			$bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8', 'root', '');
 			$bdd->query('UPDATE utilisateurs SET Etat_connexion = 1 WHERE Adresse_mail = "'.$emailF.'"'); // l'utilisateur est connecte dans la colonne etat
 /*
@@ -63,7 +63,7 @@ $Etat = $RechercheEtat['Etat_connexion'];
 
 		else // Cas où le mdp ne correspond pas à l'adresse email rentrée.
 		{
-			echo "Votre mot de passe est erroné. Redirection dans 3 secondes...";
+			echo "Une des deux informations est eronnee. Redirection dans 3 secondes...";
 			header('Refresh: 3; ../../connexion/Vue/VueConnexion.php');
 		}
 
@@ -79,7 +79,7 @@ $Etat = $RechercheEtat['Etat_connexion'];
 else if ($mdpF == $MDPuti) //cas où l'utilisateur est déjà connecté
 {
 	echo "Vous êtes déjà connecté. Redirection en cours...";
-	header('Refresh: 3; ../../deconnexion/Controleur/ProcessDeconnexion.php');	
+	header('Refresh: 3; ../../deconnexion/Controleur/ProcessDeconnexion.php');
 }
 
 else // Cas où l'utilisateur est déjà connecté mais le  mdp ne correspond pas à l'adresse email rentrée.
