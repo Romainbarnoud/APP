@@ -240,14 +240,14 @@ if (isset($_POST) && !empty($_POST)){
         </select>
       </label>   <br>
       <label id="presence">
-        Le capteur sera-t-il présent sur la page d'acceuil ?
+        L'équipement sera-t-il présent sur la page d'acceuil ?
         <select name="presence" class="bas">
             <option value="oui"> oui </option>;
             <option value="non"> non </option>;
         </select>
       </label>   <br>
       <label id="piece">
-        Dans quel pièce souhaitez-vous mettre le capteur ?
+        Dans quel pièce souhaitez-vous mettre l'équipement ?
         <select name="piece" class="bas">
           <option value=""> </option>
           <?php foreach($listep as $d => $elementp) {
