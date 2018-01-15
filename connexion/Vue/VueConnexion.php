@@ -20,7 +20,7 @@
 
     	   <form method="post" action="../../connexion/Controleur/ControleurConnexion.php">
 
-    	       <p><label>Adresse email</label> : <br><input type="email" name="adresse_mailF" id="adresse_mailF" maxlenght="255" required/></br></p>
+    	       <p><label>Adresse mail</label> : <br><input type="email" name="adresse_mailF" id="adresse_mailF" maxlenght="255" required/></br></p>
 
     	       <p><label>Mot de passe</label> : <br><input type="password" name="mot_de_passeF" id="mot_de_passeF" minlenght="6" maxlenght="255" required/></br></p>
 
