@@ -15,7 +15,7 @@
     <body>
       
 
-        <section class="FormulaireDeCo"> <!--Formulaire de connexion-->
+        <section class="FormulaireDeCo"> <!--Formulaire de connexion :-->
         
 
     	   <form method="post" action="../../connexion/Controleur/ControleurConnexion.php">
