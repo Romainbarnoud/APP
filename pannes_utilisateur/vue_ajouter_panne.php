@@ -1,7 +1,7 @@
 
 <div class="formulaire_domisep">
 	<br>
-	<h3>Formulaire de panne TEST</h3>
+	<h3>Formulaire de panne TES2</h3>
 <form class="" action="form_panne.php" method="post">
 	<p>Équipement</p>
 	<select name="capteur">
