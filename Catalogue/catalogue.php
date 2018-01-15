@@ -4,7 +4,7 @@
     <head>
  		<meta charset="utf-8" />
 		<link rel="stylesheet" href="StyleCata.css" />
-    	<title>HUS - Catalogue</title>
+    	<title>HUS - Catalog</title>
     	<link rel="stylesheet" href="../Mise_en_page/header.css"/>
     	<link rel="stylesheet" href="../Mise_en_page/footer.css"/>
     </head>
