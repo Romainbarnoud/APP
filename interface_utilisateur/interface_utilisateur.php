@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>HUS - Mon interface TEST</title>
+        <title>HUS - Mon interface</title>
         <link rel="stylesheet" href="style.css"/>
         <link rel="stylesheet" href="../Mise_en_page/header.css"/>
         <link rel="stylesheet" href="../Mise_en_page/footer.css"/>
