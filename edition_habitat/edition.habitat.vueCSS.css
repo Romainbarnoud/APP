@@ -1,6 +1,6 @@
 body
 {
-	background-color: rgb(187 , 210 , 225);
+	background-color: rgb(230, 213, 174);
 	margin: 0px;
 }
 
@@ -12,6 +12,26 @@ h1
 a
 {
 	text-decoration: none;
+}
+
+table
+{
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin: auto;
+	margin-top: 20px;
+}
+
+th
+{
+	border: 1px solid black;
+	width: 100px;
+}
+
+td
+{
+	border: 1px solid black;
+	text-align: center;
 }
 
 #sectionPieces
@@ -32,7 +52,7 @@ a
 {
 	width: 95%;
 	min-height: 150px;
-	border: 1px solid gray;
+	border: 1px solid white;
 	display: flex;
 	flex-wrap: wrap;
 	align-content: space-around;
@@ -84,29 +104,6 @@ a
 {
 	margin-bottom: 10px;
 }
-table
-{
-	border: 1px solid black;
-	border-collapse: collapse;
-	margin: auto;
-	margin-top: 20px;
-}
-
-th
-{
-	border: 1px solid black;
-	width: 100px;
-}
-
-td
-{
-	border: 1px solid black;
-	text-align: center;
-}
-
-
-
-
 
 
 
