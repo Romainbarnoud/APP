@@ -7,7 +7,8 @@
 <?php
 
 
-$bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8', 'root', '');
+// connnexion à la base de données HUS
+include ("C:\wamp64\www\HUSv4\HUSv4\connexionbdd.php");
 
 
 session_start();

@@ -4,14 +4,22 @@
 	<meta charset="utf-8">
 	<link href="profil.css" media="all" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="../Mise_en_page/header.css"/>
-    <link rel="stylesheet" href="../Mise_en_page/footer.css"/>
+	<link rel="stylesheet" href="../Mise_en_page/footer.css"/>
+	<?php require'class_manager.php';
+	/*
+
+	session_start();
+	$ID=$_SESSION['ID_utilisateurs'];
+	 */
+	?>
 	<title>Page de profil</title>
 </head>
 
     <body>
-		<header>
-        	<?php include("../Mise_en_page/header.html");?>
-        </header>    	
+			<header>
+					<?php include("../Mise_en_page/header.html");?>
+			</header>
+
 
     	<section id="profil_et_édition">
     		<!-- Information du profil et changement des informations :-->
@@ -19,8 +27,8 @@
     		<div id="info_profil">
     			<h1>Mon profil</h1>
                 <?php include("info.php");?>
-    			
-    			
+
+
     		</div >
 
 
@@ -30,25 +38,25 @@
 
     			<form method="post" action="edition.php" >
 
-                    <p><label>eMail</label> : <br><input type="email" name="adresse_mail" id="email" maxlenght="255" required /></br></p>
-    				
+                    <p><label>eMail</label> : <br><input type="email" name="adresse_mail" id="email"  required /><br></p>
 
-    				<p><label>Nouveau mot de passe</label> : <br><input type="password" name="Nouveau_mot_de_passe" id="N_Mdp" maxlenght="255" /></br></p>
-                    
 
-    				<p><label>Tel. Mobile</label> : <br><input type="tel" name="mobile" id="mobile" maxlenght="10" /></br></p>
-    				<p><label>Tel. fix</label> : <br><input type="tel" name="fix" id="fix" maxlenght="10" /></br></p>
-                    
-                   
+    				<p><label>Nouveau mot de passe</label> : <br><input type="password" name="Nouveau_mot_de_passe" id="N_Mdp"  /><br></p>
+
+
+    				<p><label>Tel. Mobile</label> : <br><input type="tel" name="mobile" id="mobile"  /><br></p>
+    				<p><label>Tel. fix</label> : <br><input type="tel" name="fix" id="fix" /><br></p>
+
+
 
 
     				<p><input type="submit" value="Envoyer" /></p>
-    				
+
     			</form>
-    			
+
     		</div>
 
-    		
+
     	</section>
 
 
@@ -58,23 +66,29 @@
 
     		<div id="utilisateurs_secondaires">
     			<h1>Utilisateurs secondaires</h1>
-                <?php include("utilisateurs.php") ?>
-    			
+                <?php
+                require 'fx_vue_second.php';
+                //boites_utilisateurs($ID);
+                boites_utilisateurs(27);
+                ?>
+
     		</div>
+    		<div id="modif">
+    		<?php //boite_modif($ID);
+                boite_modif(27);?>
 
 
-    		<div id="droits_utilisateurs">
-    			<h1>Droits</h1>
-                <?php include("droits_utilisateurs.php") ?>
-    			
+
     		</div>
-    		
 
     	</section>
+
+
+    </body>
+
+
 		<footer>
 			<?php include("../Mise_en_page/footer.php");?>
 		</footer>
-    
-    </body>
 
 </html>

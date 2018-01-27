@@ -19,12 +19,17 @@ function UpdateElementBdd($table, $colonne, $update, $filtre1, $filtre2)
 }
 
 
+if (isset($_POST) && !empty($_POST)){
+	if (isset($_POST['type_utilisateur']) && isset($_POST['valider'])){
+		$typeUti = $_POST['type_utilisateur'];
+	Redirection($typeUti);
+}
+}
 
 
-
-function Redirection($typeUti)
+function Redirection($entre)
 {
-	switch ($typeUti) 
+	switch ($entre)
 	{
 		case 'primaire':
 
@@ -42,7 +47,7 @@ function Redirection($typeUti)
 		case 'administrateur':
 			header('Location:../../pageadmin/appadmin.php');
 			break;
-		
+
 		default:
 			echo "error";
 			break;

@@ -1,7 +1,7 @@
 
 <div class="formulaire_domisep">
 	<br>
-	<h3>Formulaire de panne TEST Jeudi matin 2</h3>
+	<h3>Formulaire de panne</h3>
 <form class="" action="form_panne.php" method="post">
 	<p>Équipement</p>
 	<select name="capteur">
@@ -10,9 +10,7 @@
 	<option><?php echo $donnees['Nom']?></option>
 	<?php } ?>
 	</select>
-	<p>Date de signalement</p>
-	<input type="date" name="date" value="<?php echo date('Y-m-d'); ?>">
-	<p>Type de panne</p>
+	<p>Descriptif panne</p>
 	<textarea name="type_panne" id="" cols="25" rows="5"></textarea>
 	<br>
 	<br>

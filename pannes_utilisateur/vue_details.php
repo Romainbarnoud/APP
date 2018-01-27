@@ -21,7 +21,7 @@
       <ul id="navlist1">
         <li><?php echo $donnees['type_panne']?></li>
         <li><?php echo $donnees['date']?></li>
-        <li><?php echo $donnees['dates_passees']?></li>
+        <li><?php echo $donnees['nbre_interventions_effectuees']?></li>
       </ul>
 </div>
 <br>

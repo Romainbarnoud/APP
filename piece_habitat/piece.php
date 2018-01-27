@@ -16,7 +16,7 @@
     	<!-- adapter la taille du cadre en fonction du nombre de pièces -->
 		<?php include("variables.php");?>
 
-		<h1 class="cadre" id="titre_piece">Salon</h1>
+		<h1 class="cadre" id="titre_piece"><?php echo $piece['Nom'] ;?></h1>
 		<!--Affichage des equipements-->
     	<section class="cadre" style="height : <?php echo $taille_cadre_equipement; ?>px ;">
 		    <?php include("affichage_equipements.php");?>

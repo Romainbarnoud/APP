@@ -27,14 +27,14 @@ function login() {
 function insertPanne() {
   $bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8;','root','');
 
-  $req = $bdd->prepare('INSERT INTO pannes(client_id,capteur,date,type_panne,etat,date_intervention,nbre_interventions_necessaires,dates_passees,ID_Equipement) VALUES(:client_id,:capteur,:date,:type_panne,:etat,:date_intervention,:nbre_interventions_necessaires,:dates_passees,:ID_Equipement)');
+  $req = $bdd->prepare('INSERT INTO pannes(client_id,capteur,date,type_panne,etat,date_intervention,nbre_interventions_necessaires,nbre_interventions_effectuees,ID_Equipement) VALUES(:client_id,:capteur,:date,:type_panne,:etat,:date_intervention,:nbre_interventions_necessaires,:dates_passees,:ID_Equipement)');
   $req2=$bdd->query('SELECT ID FROM equipements WHERE Nom="'.$_POST['capteur'].'"');
   $equ=$req2->fetch();
   $req->execute(array(
 
   'client_id'=>$_SESSION['IDutilisateur'],
   'capteur'=>$_POST['capteur'],
-  'date'=>$_POST['date'],
+  'date'=>date('Y-m-d'),
   'type_panne'=>$_POST['type_panne'],
   'etat'=>'en attente',
   'date_intervention'=>date('Y-m-d'),
@@ -47,7 +47,7 @@ function insertPanne() {
 
 function listeEquipements() {
   $bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8;','root','');
-  $req = $bdd->query('SELECT  Nom FROM equipements');
+  $req = $bdd->query('SELECT Nom FROM equipements');
   return $req;
 }
 ?>

@@ -1,9 +1,10 @@
 
 <form method="post" action="droits_utilisateurs.php>">
-	
-<?php 
 
-$bdd = new PDO('mysql:host=localhost;dbname=hus;charset=utf8', 'root', '');
+<?php
+
+// connnexion à la base de données HUS
+include ("C:\wamp64\www\HUSv4\HUSv4\connexionbdd.php");
 
 
 
@@ -23,7 +24,7 @@ $Util->execute(array($ID));
 while ($Util2 = $Util->fetch())//on affiche la liste des utilisateurs secondaires
 {
 		?><input type="radio" checked="checked" value='True' name=<?php echo $Util2['Nom']+$Util2['Prenom'];?> value="True"/><label><?php echo $Util2['Nom'];?></label><br /><?php
-				
+
 }
 
 

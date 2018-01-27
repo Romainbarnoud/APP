@@ -1,6 +1,6 @@
 ﻿<?php
 session_start();
-  $bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8;','root','');
+$bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8;','root','');
 
 // VERIFIER QUE LA REQUÊTE EST JUSTE
 // On ne veut pas que l'utilisateur entre un message vide

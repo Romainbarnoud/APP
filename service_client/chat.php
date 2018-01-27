@@ -1,18 +1,24 @@
 <?php
 
-  $bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8;','root','');
+  include ("../connexionbdd.php");
 ?>
 <form class="receiver" action="chat.php?id=<?php $_GET['id'] ?>" method="GET">
-  <input type="text" name="id" value="<?php echo $_GET['id'] ?>" style="width:60px;">
+<select class="" name="id">
+    <?php
+        $requete1 = $bdd->query('SELECT ID, Nom FROM utilisateurs');
+     while ($donnees=$requete1->fetch()) { ?>
+    <option value="<?php echo  $donnees['ID'] ?> "> <?php echo $donnees['Nom'] ?> </option>
+  <?php  } ?>
+</select>
+   <!--<input type="text" name="id" value="<?php // echo $_GET['id'] ?>" style="width:60px;"> -->
   <input type="submit" name="" value="Selectionner">
 </form>
 <div class="chat">
 <?php
-
-$request = $bdd->prepare('SELECT chat.date, users.nom ,chat.message FROM users, chat WHERE users.client_id = chat.user_sender AND (chat.user_sender = ? OR chat.user_receiver = ? ) ORDER BY date');
+$request = $bdd->prepare('SELECT chat.date, utilisateurs.Nom ,chat.message FROM utilisateurs, chat WHERE utilisateurs.ID = chat.user_sender AND (chat.user_sender = ? OR chat.user_receiver = ? ) ORDER BY date');
 $request->execute(array($_GET['id'],$_GET['id']));
 while ($data = $request->fetch()) {
-  echo $data['date']," ",$data['nom']," ",$data['message']; ?>
+  echo $data['date']," ",$data['Nom']," ",$data['message']; ?>
 <br>
 <?php
 }

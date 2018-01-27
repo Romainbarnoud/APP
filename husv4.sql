@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 21 Décembre 2017 à 11:41
+-- Généré le :  Lun 08 Janvier 2018 à 11:52
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `categorie_equipement` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=60 ;
 
 --
 -- Contenu de la table `categorie_equipement`
@@ -53,7 +53,9 @@ INSERT INTO `categorie_equipement` (`ID`, `Nom`) VALUES
 (3, 'temperature'),
 (4, 'pression'),
 (43, 'pas de catégorie'),
-(44, 'humidité');
+(54, 'capteur de mouvement'),
+(55, 'chauffage'),
+(58, 'climatisation');
 
 -- --------------------------------------------------------
 
@@ -136,10 +138,41 @@ CREATE TABLE IF NOT EXISTS `consommation` (
 CREATE TABLE IF NOT EXISTS `donnee` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Date` datetime NOT NULL,
-  `Donnée` int(11) NOT NULL,
+  `Donnee` int(11) NOT NULL,
   `ID_Equipement` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+
+--
+-- Contenu de la table `donnee`
+--
+
+INSERT INTO `donnee` (`ID`, `Date`, `Donnee`, `ID_Equipement`) VALUES
+(1, '2018-01-07 12:53:22', 20, 105),
+(26, '2018-01-08 10:05:19', 21, 105),
+(27, '2018-01-08 10:05:24', 21, 105),
+(28, '2018-01-08 10:05:30', 21, 105),
+(29, '2018-01-08 10:05:35', 21, 105),
+(30, '2018-01-08 10:05:40', 21, 105),
+(31, '2018-01-08 10:05:45', 21, 105),
+(32, '2018-01-08 10:05:50', 21, 105),
+(33, '2018-01-08 10:05:55', 21, 105),
+(34, '2018-01-08 10:06:00', 21, 105),
+(35, '2018-01-08 10:06:05', 21, 105),
+(36, '2018-01-08 10:06:10', 21, 105),
+(37, '2018-01-08 10:06:15', 21, 105),
+(38, '2018-01-08 10:06:20', 21, 105),
+(39, '2018-01-08 10:06:25', 21, 105),
+(40, '2018-01-08 10:06:30', 21, 105),
+(41, '2018-01-08 10:06:35', 21, 105),
+(42, '2018-01-08 10:06:40', 21, 105),
+(43, '2018-01-08 10:06:46', 21, 105),
+(44, '2018-01-08 10:06:51', 21, 105),
+(45, '2018-01-08 10:06:56', 21, 105),
+(46, '2018-01-08 10:07:01', 21, 105),
+(47, '2018-01-08 10:07:06', 21, 105),
+(48, '2018-01-08 10:07:11', 21, 105),
+(49, '2018-01-08 10:07:16', 21, 105);
 
 -- --------------------------------------------------------
 
@@ -194,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `equipements` (
   `ID_type_equipement` int(11) NOT NULL,
   `ID_categorie_equipement` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=102 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=106 ;
 
 --
 -- Contenu de la table `equipements`
@@ -203,9 +236,12 @@ CREATE TABLE IF NOT EXISTS `equipements` (
 INSERT INTO `equipements` (`ID`, `Nom`, `Reference`, `Etat`, `Date_installation`, `Presence_page_accueil`, `ID_Piece`, `ID_Equipement_lie`, `ID_type_equipement`, `ID_categorie_equipement`) VALUES
 (1, 'cemac salon', '', 0, '2017-11-24 14:34:37', 0, 1, NULL, 6, 43),
 (95, 'cemac rdc', '', 0, '2017-12-12 09:43:31', 0, 1, NULL, 6, 43),
-(96, 'actionneur1', '', 1, '2017-12-12 09:44:13', 0, 5, 95, 3, 43),
-(99, 'capteur de pression', '', 1, '2017-12-15 14:45:47', 1, 2, 95, 1, 4),
-(101, 'actionneur salon', '684548474531rgrgrtg', 0, '2017-12-21 11:00:00', 0, 4, NULL, 6, NULL);
+(96, 'actionneur1', '', 0, '2017-12-12 09:44:13', 0, 5, 95, 3, 43),
+(99, 'capteur de pression', '', 0, '2017-12-15 14:45:47', 1, 2, 95, 1, 4),
+(101, 'actionneur salon', '684548474531rgrgrtg', 0, '2017-12-21 11:00:00', 0, 4, NULL, 3, NULL),
+(103, 'lumiere salon', '546423684', 1, '2017-12-30 18:02:26', 1, 1, 1, 3, 2),
+(104, 'Chauffage salon', 'f16r4f63r51f', 1, '2017-12-30 18:35:18', 1, 1, 1, 3, 55),
+(105, 'capteur temperature', '5464r3s4d6', 0, '2017-12-30 18:48:28', 1, 1, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -220,8 +256,24 @@ CREATE TABLE IF NOT EXISTS `equipements_proposes_par_domisep` (
   `Reference` text NOT NULL,
   `Prix` int(11) NOT NULL,
   `Caracteristiques` text NOT NULL,
+  `Type_equipement` varchar(255) NOT NULL,
+  `Categorie_equipement` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=9 ;
+
+--
+-- Contenu de la table `equipements_proposes_par_domisep`
+--
+
+INSERT INTO `equipements_proposes_par_domisep` (`ID`, `Lien_image`, `Nom`, `Reference`, `Prix`, `Caracteristiques`, `Type_equipement`, `Categorie_equipement`) VALUES
+(1, '', 'Capteur de soleil - Sunis Wirefree IO', 'XHEF3', 110, 'Le détecteur de soleil Somfy permet de mesurer l''ensoleillement à l''extérieur de votre habitat : maison, appartement... Ce capteur est conçu pour être couplé avec la Somfy Box ou TaHoma, afin de pouvoir envoyer des ordres aux autres équipement Somfy de la maison (volets, stores, lumières).', 'luminosite', 'capteur'),
+(2, 'https://www.w3schools.com/w3css/img_fjords.jpg', 'Capteur de température extérieur- TahoMa', 'XARK9', 100, 'Le capteur de température extérieur pour box domotique (thermis) gère l’activation et la désactivation du chauffage, la descente et la remontée des volets roulants, screens extérieurs des stores et brise-soleil orientables en fonction du seuil de température réglé sur l’interface TaHoma', 'temperature', 'capteur'),
+(3, '', 'Détecteur de fumée - devolo Home Control', 'BDIZYX41', 60, 'Le détecteur de fumée connecté devolo Home Control identifie tout développement de fumée très tôt et avec précision. Cet appareil alimenté par pile est installé au plafond de votre pièce où il passe presque inaperçu. Il ne nécessite aucune intervention sauf pour remplacer les piles, procéder à un test de fonctionnement et en cas d''alarme. Comme tous les composants devolo Home Control, le détecteur de fumée est configuré confortablement à travers la box devolo Home Control. Après la configuration, vous pouvez ainsi contrôler le détecteur de n''importe où pendant vos absences.', 'securite', 'capteur'),
+(4, '', 'Thermostat d''ambiance - Devolo Home Control', 'XURIKTREE74', 100, 'Le thermostat d''ambiance devolo Home Control veille à ce que vous ayez dans chaque pièce la température à laquelle vous vous sentez à l''aise. Avec ce régulateur thermostatique contrôlable à distance et les thermostats de radiateur associés, vous n’avez qu’à régler la température ambiante à votre fauteuil ou à votre table au salon. Le gradient de température qui prévaut habituellement entre votre endroit préféré et le radiateur est compensé automatiquement − du moment que vous utilisez aussi le thermostat de radiateur devolo Home Control.', 'temperature', 'capteur'),
+(5, '', 'Sirène d''alarme - Devolo Home Control', 'LUCARIO25', 80, 'Avec la sirène d''alarme domotique devolo Home Control, votre maison intelligente se fait entendre ! Ses 110 décibels vous avertissent de tout évènement susceptible de menacer votre maison, avec les personnes et les biens qui s’y trouvent. Vous pouvez désormais dormir tranquilles, votre alarme domotique vous alerte en cas d’intrusion, de cambriolage, de départ d’incendie ou de début d’inondation. Chaque danger est signalé de manière fiable par un son puissant.', 'securite', 'capteur'),
+(6, '', 'Thermostat de radiateur - Devolo Home Control', 'MEIAOU89', 70, 'Le thermostat de radiateur intelligent devolo Home Control assure la température à laquelle vous vous sentez à l''aise dans tous les cas où vous en avez le plus besoin : le matin à la salle de bain et à la cuisine, et au salon quand vous rentrez le soir, votre chauffage domotique prend soin de votre bien être . Avec le thermostat de radiateur à commande radio et la box devolo Home Control, vous réglez la température ambiante entièrement selon vos souhaits, à la minute près.', 'temperature', 'capteur'),
+(7, '', 'devolo Home Control - Détecteur de mouvement', 'HKBJIW903', 70, 'Avec le détecteur de présence devolo Home Control, vous êtes toujours en sécurité chez vous. Ce détecteur de mouvement sans fil peut être mis en place discrètement partout dans votre maison et surveille un angle de 90°.Le capteur détecte les mouvements à l''intérieur de la maison et les signale. Étant parfaitement intégré dans votre système smart home intelligent, celui-ci vous tient au courant des allées et venues dans votre maison. Vous pouvez aussi coupler le détecteur de mouvement par radio à la commande de l''éclairage, par exemple pour allumer les lampes voulues dès que vous rentrez chez vous.', 'Confort', 'Capteur'),
+(8, '', 'Relais connecté sans fil - DIO Ed th 02', 'MINDILIP107', 50, 'Brancher le module sur l’entrée thermostat de la chaudière. Grâce à  l''actionneur DiO, le chauffage est programmé et contrôlé facilement depuis n’importe où avec votre smartphone.\r\n', 'actionneur', 'actionneur');
 
 -- --------------------------------------------------------
 
@@ -231,11 +283,13 @@ CREATE TABLE IF NOT EXISTS `equipements_proposes_par_domisep` (
 
 CREATE TABLE IF NOT EXISTS `fonctionnalite_programmee` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_Utilisateur` int(11) NOT NULL,
   `Nom` varchar(30) NOT NULL,
-  `Date_de_la_demande` datetime NOT NULL,
-  `Date_execution` datetime NOT NULL,
-  `Detail _de_la_demande` varchar(255) NOT NULL,
+  `Etat` tinyint(1) NOT NULL,
   `ID_Equipement` int(11) NOT NULL,
+  `Jours_activite` int(11) NOT NULL,
+  `Heure_Debut` int(11) NOT NULL,
+  `Heure_Fin` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
@@ -262,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `formulaire_sav` (
 
 CREATE TABLE IF NOT EXISTS `habitat` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Code postal` int(11) NOT NULL,
+  `Code_postal` int(11) NOT NULL,
   `Rue` varchar(255) NOT NULL,
   `Numero_de_la_rue` int(11) NOT NULL,
   `Etage` int(11) DEFAULT NULL,
@@ -271,14 +325,13 @@ CREATE TABLE IF NOT EXISTS `habitat` (
   `ID_Pays` int(11) NOT NULL,
   `ID_Ville` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `habitat`
 --
 
-INSERT INTO `habitat` (`ID`, `Code postal`, `Rue`, `Numero_de_la_rue`, `Etage`, `Numero_de_appartement`, `Surface`, `ID_Pays`, `ID_Ville`) VALUES
-(1, 75006, 'rue du regard', 16, 0, 15, 0, 1, 1),
+INSERT INTO `habitat` (`ID`, `Code_postal`, `Rue`, `Numero_de_la_rue`, `Etage`, `Numero_de_appartement`, `Surface`, `ID_Pays`, `ID_Ville`) VALUES
 (2, 75001, 'rue des renards', 14, NULL, NULL, 150, 1, 3),
 (3, 78960, 'Rue des peupliers', 21, NULL, NULL, 250, 1, 2),
 (4, 74003, 'Rue du 14 juillet', 12, 5, 7, 150, 1, 4);
@@ -295,27 +348,6 @@ CREATE TABLE IF NOT EXISTS `intervention_domisep` (
   `Description_intervention` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `lien-utilisateur-habitat`
---
-
-CREATE TABLE IF NOT EXISTS `lien-utilisateur-habitat` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_type_utilisateur` int(11) NOT NULL,
-  `ID_Habitat` int(11) DEFAULT NULL,
-  `ID_Utilisateur` int(11) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=20 ;
-
---
--- Contenu de la table `lien-utilisateur-habitat`
---
-
-INSERT INTO `lien-utilisateur-habitat` (`ID`, `ID_type_utilisateur`, `ID_Habitat`, `ID_Utilisateur`) VALUES
-(19, 2, 1, 27);
 
 -- --------------------------------------------------------
 
@@ -343,6 +375,37 @@ CREATE TABLE IF NOT EXISTS `lien_intervention_domisep-panne` (
   `ID_Utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `lien_utilisateur_habitat`
+--
+
+CREATE TABLE IF NOT EXISTS `lien_utilisateur_habitat` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_type_utilisateur` int(11) NOT NULL,
+  `ID_Habitat` int(11) DEFAULT NULL,
+  `ID_Utilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=31 ;
+
+--
+-- Contenu de la table `lien_utilisateur_habitat`
+--
+
+INSERT INTO `lien_utilisateur_habitat` (`ID`, `ID_type_utilisateur`, `ID_Habitat`, `ID_Utilisateur`) VALUES
+(20, 2, NULL, 38),
+(21, 5, NULL, 39),
+(22, 3, NULL, 40),
+(23, 4, NULL, 41),
+(24, 6, 2, 42),
+(25, 2, 3, 43),
+(26, 1, 4, 44),
+(27, 1, 0, 45),
+(28, 3, 2, 46),
+(29, 4, 4, 47),
+(30, 5, 0, 48);
 
 -- --------------------------------------------------------
 
@@ -398,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `pays` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `pays`
@@ -437,12 +500,13 @@ INSERT INTO `pieces` (`ID`, `Nom`, `Surface`, `ID_Habitat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `poins_de_vente_domisep`
+-- Structure de la table `points_de_vente_domisep`
 --
 
-CREATE TABLE IF NOT EXISTS `poins_de_vente_domisep` (
+CREATE TABLE IF NOT EXISTS `points_de_vente_domisep` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Nom_du_point_de_vente` varchar(255) NOT NULL,
+  `Image` text,
   `Code_postal` int(11) NOT NULL,
   `Rue` varchar(255) NOT NULL,
   `Numero_de_la_rue` int(11) NOT NULL,
@@ -450,6 +514,7 @@ CREATE TABLE IF NOT EXISTS `poins_de_vente_domisep` (
   `Adresse_mail` varchar(255) NOT NULL,
   `ID_Pays` int(11) NOT NULL,
   `ID_Ville` int(11) NOT NULL,
+  `ID_Departement` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
@@ -477,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `type_equipement` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `type_equipement`
@@ -552,19 +617,18 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `Date_inscription` date NOT NULL,
   `ID_compte_parent` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=49 ;
 
 --
 -- Contenu de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`ID`, `Nom`, `Prenom`, `Adresse_mail`, `Mot_de_passe`, `Numero_fixe`, `Numero_Telephone`, `Etat_connexion`, `Date_inscription`, `ID_compte_parent`) VALUES
-(25, 'BRY', 'Nathan', 'nathan.bry@gmail.com', 'nathan', 2147483647, 130966728, 1, '2017-12-12', NULL),
-(26, 'Brayelle', 'Rémi', 'remi.brayelle@isep.fr', 'remi', 123654789, 632145698, 0, '2017-12-12', NULL),
-(27, 'JOLY', 'Guillaume', 'guillaume.joly@isep.fr', 'guillaume', 123658798, 778986554, 1, '2017-12-12', NULL),
-(28, 'CHUPIN', 'Quentin', 'quentin.chupin@isep.fr', 'quentin', 145786554, 745987865, 1, '2017-12-13', NULL),
-(33, 'DUPONT', 'David', 'david.dupont@isep.fr', 'david', 158497865, 789564512, 0, '2017-12-14', 28),
-(34, 'BALLAS', 'Nicolas', 'nicolas.ballas@isep.fr', 'nicolas', 156789665, 678965412, 1, '2017-12-14', NULL);
+(43, 'BARNOUD', 'Romain', 'romain.barnoud@isep.fr', 'romain', 158497865, 944945465, 1, '2017-12-28', NULL),
+(45, 'BALLAS', 'Nicolas', 'nicolas.ballas@isep.fr', 'nicolas', 158497865, 678965412, 1, '2018-01-06', NULL),
+(46, 'AUBIER', 'Jules', 'jules.aubier@isep.fr', 'jules', 158497685, 678451235, 1, '2018-01-06', 43),
+(47, 'BRY', 'Nathan', 'nathan.bry@isep.fr', 'nathan', 158497685, 789564512, 1, '2018-01-06', NULL),
+(48, 'BRAYELLE', 'Remi', 'remi.brayelle@isep.fr', 'remi', 158497865, 944945465, 1, '2018-01-06', NULL);
 
 -- --------------------------------------------------------
 
@@ -576,7 +640,7 @@ CREATE TABLE IF NOT EXISTS `ville` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `ville`
@@ -587,7 +651,8 @@ INSERT INTO `ville` (`ID`, `nom`) VALUES
 (2, 'Perpignan'),
 (3, 'Marseille'),
 (4, 'Lille'),
-(5, 'Bordeaux');
+(5, 'Bordeaux'),
+(6, 'Lyon');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

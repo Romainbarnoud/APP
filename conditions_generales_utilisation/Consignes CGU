@@ -1,0 +1,16 @@
+-- BASE DE DONNEE --
+créer une table CGU
+	- texte
+	- dernière date de modif
+
+-- CÔTÉ CLIENT --
+M -> requête SQL pour lire les infos
+V -> afficher les infos
+C -> faire le lien enntre modèle et vue
+
+-- CÔTÉ SERVEUR --
+M -> requête SQL pour récupérer les infos
+  -> requête SQL pour modifier les infos (cf. ajouter une panne)
+
+V -> zone de texte pour récupérer les infos + formulaire (cf. ajouter une panne)
+C -> faire le lien entre modèle et vue

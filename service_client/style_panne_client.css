@@ -23,6 +23,11 @@ html {
   height:500px;
   border: 1px solid black;
 }
+.sousListePannes {
+    overflow-x: hidden;
+  overflow-y: scroll;
+  height:300px;
+}
 
 #details_panne {
   margin: 0 auto;

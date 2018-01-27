@@ -21,12 +21,12 @@ while($donnees = $req->fetch()) {
 		  <ul id="navlist1">
 			  <li><strong>Type de panne</strong></li>
 		    <li><strong>Derniere panne du capteur</strong></li>
-		    <li><strong>Dates d'intervention passées</strong></li>
+		    <li><strong>Nombre d'interventions effectuées</strong></li>
 		  </ul>
       <ul id="navlist1">
         <li> <input type="text" name="type_panne" value="<?php echo $donnees['type_panne']?>"></li>
         <li> <input type="date" name="date" value="<?php echo $donnees['date_intervention']?>"></li>
-        <li> <input type="text" name="dates_passees" value="<?php echo $donnees['dates_passees']?>"></li>
+        <li> <input type="text" name="nbre_interventions_effectuees" value="<?php echo $donnees['nbre_interventions_effectuees']?>"></li>
       </ul>
       <input type="text" name="id" value="<?php echo $donnees['id']?>" style="display:none;">
       <input type="submit" class="submit" value="Modifier">

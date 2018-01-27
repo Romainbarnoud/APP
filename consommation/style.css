@@ -1,0 +1,12 @@
+#container{
+	min-width: 300px;
+	height: 400px;
+	margin: 0 auto;
+	margin-left: 195px;
+}
+body{
+	background-color: rgb(187 , 210 , 225);
+}
+.formulaire{
+	margin-left: 200px;
+}

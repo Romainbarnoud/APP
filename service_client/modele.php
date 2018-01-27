@@ -1,8 +1,18 @@
 <?php
 function listePannes() {
   $bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8;','root','');
-  $reponse = $bdd->query('SELECT pannes.client_id,pannes.id,pannes.date,pannes.capteur,pannes.type_panne,pannes.date_intervention,pannes.etat, utilisateurs.Nom FROM pannes, utilisateurs WHERE pannes.client_id = utilisateurs.ID ORDER BY ID DESC');
-  return $reponse;
+  if (!isset($_GET['tri'])) {
+    $_GET['tri'] = "pannes.client_id";
+  }
+  $sth = $bdd->prepare('SELECT pannes.*, utilisateurs.Nom FROM pannes, utilisateurs WHERE pannes.client_id = utilisateurs.ID ORDER BY '.$_GET["tri"].'');
+  $sth->execute();
+  return $sth;
+}
+
+function listeClients() {
+    $bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8;','root','');
+    $sth = $bdd->query('SELECT ID FROM utilisateurs');
+    return $sth;
 }
 
 function getDetails() {

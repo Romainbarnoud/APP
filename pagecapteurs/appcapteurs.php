@@ -1,12 +1,22 @@
 <?php
-  $bdd = new PDO('mysql:host=localhost;dbname=husv4;charset=utf8', 'root', '');
-  $query1 = $bdd -> query("SELECT * FROM equipements"); // faire des jointures pour récupérer les bonnes infos
-  $donnees1 =  $query1 -> fetchall();
-// variable session avec l'ID et l'IDhabitat pour afficher les bonnes pièces et tout
+  session_start(); //ouverture de la session
+  include ("C:\wamp64\www\HUSv4\HUSv4\connexionbdd.php");
+
+  //execute les fonctionnalités programmées
+  include('..\ActualisationEtatActionneur\ActuEtatAct.php');
+
+  
+  $pieces = $bdd -> query("SELECT * FROM pieces WHERE ID_Habitat='".$_SESSION['IDhabitat']."'"); // on récupère toutes les pièces de l'habitat
+  $piecesh =  $pieces -> fetchall();
+
+  foreach ($piecesh as $i => $reponse) {
+      $query1 = $bdd -> query("SELECT * FROM equipements WHERE ID_Piece='".$reponse['ID']."'");
+      $donnees1 =  $query1 -> fetchall();
+  }
 
 
 // pour connaitre la synthaxe pour afficher une variable
-// $reponse2 = $bdd -> query("SELECT * FROM equipements"); // faire des jointures pour récupérer les bonnes infos
+// $reponse2 = $bdd -> query("SELECT * FROM equipements");
 // $donnees2 =  $reponse2 -> fetch();
 // echo $donnees2['Nom'];
 
@@ -28,30 +38,38 @@
 if (isset($_POST) && !empty($_POST)){
   //valider les données
   if(isset($_POST['valider']) && isset($_POST['nom']) && isset($_POST['presence']) && isset($_POST['etat']) && isset($_POST['piece'])
-  && isset($_POST['type']) && isset($_POST['categorie']) && isset($_POST['equipement_lié'])){
+  && isset($_POST['type']) && isset($_POST['categorie']) && isset($_POST['equipement_lié']) && isset($_POST['reference'])){
+    //if (estUneChaine($_POST['nom']) && estUnEntier($_POST['etat'])){
+    $idpiece = $bdd -> query('SELECT ID FROM pieces WHERE Nom="'.$_POST['piece'].'" AND ID_Habitat="'.$_SESSION['IDhabitat'].'"');
+    $idp = $idpiece -> fetch(); // on récupère l'ID de la pièce entré dans le formulaire
 
-    $idpiece = $bdd -> query('SELECT ID FROM pieces WHERE Nom="'.$_POST['piece'].'"');
-    $idp = $idpiece -> fetch();
     // echo $idp['ID'];
     $idtypeequipement = $bdd -> query('SELECT ID FROM type_equipement WHERE Nom="'.$_POST["type"].'"');
-    $idtype = $idtypeequipement -> fetch();
+    $idtype = $idtypeequipement -> fetch(); // on récupère l'ID du type de l'équipement rentré
+
     // echo $idtype['ID'];
     $idcategorieequipement = $bdd -> query('SELECT ID FROM categorie_equipement WHERE Nom="'.$_POST["categorie"].'"');
-    $idcategorie = $idcategorieequipement -> fetch();
+    $idcategorie = $idcategorieequipement -> fetch();// récupère l'ID de la catégorie de l'équipement
     // echo $idcategorie['ID'];
-    $idcemac = $bdd -> query ('SELECT ID FROM equipements WHERE ID_type_equipement=6 AND Nom="'.$_POST["equipement_lié"].'"'); // à modifier avec une jointure SQL pour vérifier que 6 c'est bien le type CEMAC
+
+    $idtypeequipement2 = $bdd -> query('SELECT ID FROM type_equipement WHERE Nom="cemac"');
+    $idtype2 = $idtypeequipement2 -> fetch(); // on récupère l'ID du type de l'équipement cemac
+
+    $idcemac = $bdd -> query ('SELECT ID FROM equipements WHERE ID_type_equipement="'.$idtype2['ID'].'" AND Nom="'.$_POST["equipement_lié"].'"'); // on vérifie qu'il sagit bien d'un Cemac et on récupère l'ID de l'équipement lié
     $idce = $idcemac -> fetch();
     // echo $idce['ID'];
-    $query = $bdd -> prepare("INSERT INTO equipements(Nom,Etat,Date_installation,Presence_page_accueil,ID_Piece,ID_Equipement_lie,ID_type_equipement,ID_categorie_equipement) VALUES (:Nom,:Etat,NOW(),:Presence_page_accueil,:ID_Piece,:ID_Equipement_lie,:ID_type_equipement,:ID_categorie_equipement)");
-
     if ($_POST['presence']=="oui"){
       $presence=1;
     }
     else {
       $presence=0;
     }
+    if (!empty($idce)){
+    $query = $bdd -> prepare("INSERT INTO equipements(Nom,Reference,Etat,Date_installation,Presence_page_accueil,ID_Piece,ID_Equipement_lie,ID_type_equipement,ID_categorie_equipement)
+    VALUES (:Nom,:Reference,:Etat,NOW(),:Presence_page_accueil,:ID_Piece,:ID_Equipement_lie,:ID_type_equipement,:ID_categorie_equipement)");
     $query -> execute(array(
       ':Nom' => $_POST['nom'],
+      ':Reference' => $_POST['reference'],
       ':Etat' => $_POST['etat'],
       ':Presence_page_accueil'=>$presence,
       ':ID_Piece' => $idp['ID'],
@@ -61,6 +79,23 @@ if (isset($_POST) && !empty($_POST)){
 
     header('location:appcapteurs.php');
   }
+  else {
+    $query = $bdd -> prepare("INSERT INTO equipements(Nom,Reference,Etat,Date_installation,Presence_page_accueil,ID_Piece,ID_Equipement_lie,ID_type_equipement,ID_categorie_equipement)
+    VALUES (:Nom,:Reference,:Etat,NOW(),:Presence_page_accueil,:ID_Piece,NULL,:ID_type_equipement,:ID_categorie_equipement)");
+    $query -> execute(array(
+      ':Nom' => $_POST['nom'],
+      ':Reference' => $_POST['reference'],
+      ':Etat' => $_POST['etat'],
+      ':Presence_page_accueil'=>$presence,
+      ':ID_Piece' => $idp['ID'],
+      ':ID_type_equipement' => $idtype['ID'],
+      ':ID_categorie_equipement' => $idcategorie['ID']));
+
+    header('location:appcapteurs.php');
+  }
+//  }
+}
+
     else {
       echo "formulaire invalide";
     }
@@ -70,7 +105,7 @@ if (isset($_POST) && !empty($_POST)){
 
 
 // pour faire des listes déroulantes dépendantes de la BDD
-  $listepiece = $bdd -> query("SELECT Nom FROM pieces WHERE ID_Habitat=1"); // à modifier avec des variables sessions
+  $listepiece = $bdd -> query("SELECT Nom FROM pieces WHERE ID_Habitat='".$_SESSION['IDhabitat']."'"); // à modifier avec des variables sessions
   $listep = $listepiece -> fetchall();
 
   $listetypeequipement = $bdd -> query("SELECT Nom FROM type_equipement");
@@ -79,8 +114,13 @@ if (isset($_POST) && !empty($_POST)){
   $listecategorieequipement = $bdd -> query("SELECT Nom FROM categorie_equipement");
   $listecategorie = $listecategorieequipement -> fetchall();
 
-  $listecemac = $bdd -> query ("SELECT Nom FROM equipements WHERE ID_type_equipement=6"); // à modifier avec une jointure SQL pour vérifier que 6 c'est bien le type CEMAC
-  $listece = $listecemac -> fetchall();
+  $id_categorie = $bdd -> query ("SELECT ID FROM type_equipement WHERE Nom='cemac' ");
+  $id_cemac = $id_categorie -> fetch();
+
+  foreach ($piecesh as $i => $reponse) {
+    $listecemac = $bdd -> query("SELECT * FROM equipements WHERE ID_Piece='".$reponse['ID']."' AND ID_type_equipement= '".$id_cemac['ID']."'");
+    $listece =  $listecemac -> fetchall();
+  }
 
 ?>
 <!DOCTYPE html>
@@ -88,7 +128,7 @@ if (isset($_POST) && !empty($_POST)){
 	<head>
 		<title> HUS - Equipements </title>
 		<meta charset="utf-8">
-    <link rel="stylesheet" href ="appcapteurs.css"/>
+    <link rel="stylesheet" href ="appcapteurs1.css"/>
     <link rel="stylesheet" href="../Mise_en_page/header.css"/>
     <link rel="stylesheet" href="../Mise_en_page/footer.css"/>
 	</head>
@@ -103,7 +143,9 @@ if (isset($_POST) && !empty($_POST)){
      <thead>
        <tr>
          <th>Nom</th>
+         <th>Références</th>
          <th>Etat</th>
+         <th>Donnée du capteur </th>
          <th>Date d'installation</th>
          <th>Pièce</th>
          <th>Type equipement</th>
@@ -117,7 +159,6 @@ if (isset($_POST) && !empty($_POST)){
         <?php foreach ($donnees1 as $i => $element1) {
           //Pour afficher dans le tableau
           //Jointure sql: récupérer les pieces des equipements
-
             $query2 = $bdd -> query(
               "SELECT `pieces`.`Nom`
               FROM `pieces`
@@ -149,19 +190,23 @@ if (isset($_POST) && !empty($_POST)){
               WHERE ID='".$element1['ID_Equipement_lie']."'");
               $donnees5 = $query5->fetch();
 
-            // supprimer des lignes de capteurs:
-            // Problème: il faut récupérer $i et c'est pas le cas pour l'instant
-            // echo $i;
-            // if (isset($_POST["'.$i.'"]) && !empty($_POST["'.$i.'"])){
-            //   echo "bonjour";
-            //   $delete = $bdd -> query('DELETE FROM equipements WHERE ID="'.$i.'"');
-            // }
+            // Pour afficher dans le tableau
+            // Jointure sql: récupérer les données des equipements
+              $donneecapteurs = $bdd -> query(
+                "SELECT Donnee
+                FROM donnee
+                WHERE (date < NOW()) AND (ID_Equipement = '".$element1['ID']."') ORDER BY date DESC LIMIT 1");
+                $donneec = $donneecapteurs->fetch();
               ?>
             <tr>
                <td>
                  <?php echo'<a href="appcode.php">'.$element1['Nom'].'</a>' ; // lien renvoyant à la pièce dans laquelle se trouve l'équipement
                  ?>
                  </td>
+              <td>
+                <?php echo $element1['Reference'];?>
+              </td>
+
                <td>
                  <?php
                  if ($element1['Etat']==0){
@@ -174,6 +219,16 @@ if (isset($_POST) && !empty($_POST)){
                  else {
                    $id_changement2=$element1['ID'];
                    echo '<a href="modification.php?id2='.$id_changement2.'">Allumé</a>'; // Renvoie vers supprimer.php?id=4 par exemple
+                 }
+                 ?>
+               </td>
+               <td>
+                 <?php
+                 if (!empty($donneec['Donnee'])){
+                 echo $donneec['Donnee'];
+                 }
+                 else {
+                   echo "Pas de valeur";
                  }
                  ?>
                </td>
@@ -217,14 +272,18 @@ if (isset($_POST) && !empty($_POST)){
 
 
     <p> Ajouter un Equipement </p>
-    <form method="post" action="appcapteurs.php" id="formulaire">
+    <form method="post" action="appcapteurs.php" class="formulaire">
       <label id="nomequipement">
         Nom de l'équipement:
-        <input type="text" name="nom" placeholder="Ex:cemacsalon" class="bas">
+        <input type="text" name="nom" placeholder="Ex:cemacsalon" class="bas" required>
+      </label>   <br>
+      <label id="refequipement">
+        Référence de l'équipement:
+        <input type="text" name="reference"  class="bas" required>
       </label>   <br>
       <label id="etat">
-        Etat:
-        <input type="number" name="etat" min=0 max=1 class="bas">
+        Etat: (Eteint:0 et Allumé:1)
+        <input type="number" name="etat" min=0 max=1 class="bas" required>
       </label>   <br>
       <!-- <label id="date">
         Date d'installation:
@@ -242,8 +301,8 @@ if (isset($_POST) && !empty($_POST)){
       <label id="presence">
         L'équipement sera-t-il présent sur la page d'acceuil ?
         <select name="presence" class="bas">
-            <option value="oui"> oui </option>;
             <option value="non"> non </option>;
+            <option value="oui"> oui </option>;
         </select>
       </label>   <br>
       <label id="piece">
@@ -265,7 +324,7 @@ if (isset($_POST) && !empty($_POST)){
         </select>
       </label>   <br>
       <label id="equipement_lié">
-        Si ce n'est pas un CeMAC, à quel CeMAC souhaitez-vous lié cet équipement ?
+        Si ce n'est pas une CeMAC, à quelle CeMAC souhaitez-vous lier cet équipement ?
         <select name="equipement_lié" class="bas">
           <option value=""> </option>
           <?php foreach($listece as $d => $elementcemac) {
@@ -276,17 +335,6 @@ if (isset($_POST) && !empty($_POST)){
         <input type="submit" name="valider" value ="Valider">
     </form>
 
-<?php
-//Exemple pour teste avec un catégorie d'équipement
-    // <p> Ajouter une catégorie d'équipement:
-    // <form method="post" action="">
-    //   <label>
-    //     Nom de la catégorie de l'équipement
-    //     <input type="text" name="nom" placeholder="Ex:lumière">
-    //   </label>       <br>
-    //   <input type="submit" name="valider" value="Valider">
-    // </form>
-?>
 		<footer>
 			<?php include("../Mise_en_page/footer.php");?>
 		</footer>
