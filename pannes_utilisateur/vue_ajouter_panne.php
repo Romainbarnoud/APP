@@ -4,7 +4,7 @@
 <<<<<<< HEAD
 	<h3>Formulaire de panne</h3>
 =======
-	<h3>Formulaire de panne TEST vendredi git</h3>
+	<h3>Formulaire de panne</h3>
 >>>>>>> 828731960e0f4b9ee5b7900f3cc0c9219ffd46b0
 <form class="" action="form_panne.php" method="post">
 	<p>Équipement</p>
